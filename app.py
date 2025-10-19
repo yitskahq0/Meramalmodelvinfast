@@ -2,23 +2,25 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import gdown
 import os
-import urllib.request
+
+
 # Load Model
+
 @st.cache_resource
 def load_model():
-    url = "https://drive.proton.me/urls/7ZGSJVM8TG#jECOM9nLyuI2"
     model_path = "vinfast_cnn_model1.keras"
 
-    # Cek apakah file model sudah ada
+    # Kalau model belum ada di local, download dari Google Drive
     if not os.path.exists(model_path):
-        st.write("📥 Downloading model, please wait...")
-        urllib.request.urlretrieve(url, model_path)
-
+        st.info("Sabar yaa... lagi unduh model dari Google Drive nihh bentarr...")
+        file_id = "1LuCr_vda0oOz_7-55REALzTi2gexq5U9" 
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, model_path, quiet=False)
+        
     model = tf.keras.models.load_model(model_path, compile=False)
     return model
-
-
 
 
 model = load_model()
@@ -26,6 +28,7 @@ class_names = ['VF3', 'VF5', 'VF6', 'VF7']
 
 # Dapatkan ukuran input model
 input_shape = model.input_shape[1:3]
+
 
 # UI
 st.title("Klasifikasi Mobil VinFast ")
@@ -49,14 +52,3 @@ if uploaded_file is not None:
 
     st.success(f"**Prediksi ku:** {predicted_class}")
     st.write(f"**Confidence:** {confidence:.2f}")
-
-
-
-
-
-
-
-
-
-
-
