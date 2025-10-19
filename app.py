@@ -7,7 +7,7 @@ import urllib.request
 # Load Model
 @st.cache_resource
 def load_model():
-    url = "https://drive.proton.me/urls/7ZGSJVM8TG#jECOM9nLyuI2
+    url = "https://drive.proton.me/urls/7ZGSJVM8TG#jECOM9nLyuI2"
     model_path = "vinfast_cnn_model1.keras"
 
     # Cek apakah file model sudah ada
@@ -49,6 +49,7 @@ if uploaded_file is not None:
 
     st.success(f"**Prediksi ku:** {predicted_class}")
     st.write(f"**Confidence:** {confidence:.2f}")
+
 
 
 
