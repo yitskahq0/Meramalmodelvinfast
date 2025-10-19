@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
-
+import urllib.request
 # Load Model
 @st.cache_resource
 def load_model():
@@ -12,7 +12,7 @@ def load_model():
     if not os.path.exists(model_path):
         st.info("Sabaryaa lagi ngunduh model nihh dari Hugging Face...")
         url = "https://huggingface.co/username/vinfast-cnn-model/resolve/main/vinfast_cnn_model1.h5"
-        import urllib.request
+        st.write(f"Downloading model from: {url}")
         urllib.request.urlretrieve(url, model_path)
 
     model = tf.keras.models.load_model(model_path, compile=False)
@@ -48,6 +48,7 @@ if uploaded_file is not None:
 
     st.success(f"**Prediksi ku:** {predicted_class}")
     st.write(f"**Confidence:** {confidence:.2f}")
+
 
 
 
