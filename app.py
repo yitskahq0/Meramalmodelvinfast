@@ -7,15 +7,17 @@ import urllib.request
 # Load Model
 @st.cache_resource
 def load_model():
+    url = "https://drive.proton.me/urls/7ZGSJVM8TG#jECOM9nLyuI2
     model_path = "vinfast_cnn_model1.keras"
 
+    # Cek apakah file model sudah ada
     if not os.path.exists(model_path):
-        st.info("Sabaryaa lagi ngunduh model nihh dari Hugging Face...")
-        url = "https://huggingface.co/Ishak0/meramalvinvast/blob/main/vinfast_cnn_model1.keras"
+        st.write("📥 Downloading model, please wait...")
         urllib.request.urlretrieve(url, model_path)
 
     model = tf.keras.models.load_model(model_path, compile=False)
     return model
+
 
 
 
@@ -47,6 +49,7 @@ if uploaded_file is not None:
 
     st.success(f"**Prediksi ku:** {predicted_class}")
     st.write(f"**Confidence:** {confidence:.2f}")
+
 
 
 
