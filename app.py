@@ -11,7 +11,7 @@ def load_model():
 
     if not os.path.exists(model_path):
         st.info("Sabaryaa lagi ngunduh model nihh dari Hugging Face...")
-        url = "https://huggingface.co/username/vinfast-cnn-model/resolve/main/vinfast_cnn_model1.keras"
+        url = "https://huggingface.co/Ishak0/meramalvinvast/blob/main/vinfast_cnn_model1.keras"
         st.write(f"Downloading model from: {url}")
         urllib.request.urlretrieve(url, model_path)
 
@@ -48,6 +48,7 @@ if uploaded_file is not None:
 
     st.success(f"**Prediksi ku:** {predicted_class}")
     st.write(f"**Confidence:** {confidence:.2f}")
+
 
 
 
