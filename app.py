@@ -10,15 +10,15 @@ import os
 def load_model():
     model_path = "vinfast_cnn_model1.keras"
 
-    # Kalau model belum ada di local, download dari Google Drive
     if not os.path.exists(model_path):
-        st.info("Sabar yaa... lagi unduh model dari Google Drive nihh bentarr...")
-        file_id = "1LuCr_vda0oOz_7-55REALzTi2gexq5U9"  # GANTI dengan file ID Google Drive kamu
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, model_path, quiet=False)
+        st.info("Sabaryaa lagi ngunduh model nihh dari Hugging Face...")
+        url = "https://huggingface.co/Ishak0/meramalvinvast/blob/main/vinfast_cnn_model1.keras"
+        import urllib.request
+        urllib.request.urlretrieve(url, model_path)
 
     model = tf.keras.models.load_model(model_path, compile=False)
     return model
+
 
 
 model = load_model()
@@ -49,4 +49,5 @@ if uploaded_file is not None:
 
     st.success(f"**Prediksi ku:** {predicted_class}")
     st.write(f"**Confidence:** {confidence:.2f}")
+
 
